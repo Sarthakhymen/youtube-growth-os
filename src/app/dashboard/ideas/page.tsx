@@ -9,7 +9,9 @@ import styles from './ideas.module.css';
 interface Idea {
   title: string;
   hook: string;
-  reason: string;
+  viralScore: number;
+  trendAnalysis: string;
+  targetAudience: string;
 }
 
 export default function IdeasPage() {
@@ -19,6 +21,7 @@ export default function IdeasPage() {
 
   const handleGenerate = async () => {
     if (!niche) return;
+    setIdeas([]);
     setLoading(true);
     try {
       const response = await fetch('/api/generate/ideas', {
@@ -42,7 +45,7 @@ export default function IdeasPage() {
     <div className={styles.container}>
       <Card className={styles.inputCard}>
         <h3>Viral Idea Generator</h3>
-        <p>Enter your niche to discover 10+ high-potential video ideas.</p>
+        <p>Enter your niche to discover high-potential video ideas with viral scores.</p>
         <div className={styles.inputRow}>
           <input 
             placeholder="e.g. Personal Finance, Gaming, Tech Reviews" 
@@ -60,14 +63,22 @@ export default function IdeasPage() {
           <Card key={i} className={styles.ideaCard}>
             <div className={styles.ideaHeader}>
               <div className={styles.ideaIcon}><TrendingUp size={16} /></div>
-              <span className={styles.viralPotential}>90%+ Potential</span>
+              <span className={styles.viralPotential}>{idea.viralScore}% Viral Score</span>
             </div>
             <h4>{idea.title}</h4>
             <div className={styles.hookBox}>
-              <strong>Hook:</strong> {idea.hook}
+              <strong>The Hook:</strong> {idea.hook}
             </div>
-            <p className={styles.reason}><strong>Why it works:</strong> {idea.reason}</p>
-            <Button variant="outline" size="sm" className={styles.copyBtn}><Copy size={14} /> Copy Idea</Button>
+            <div className={styles.metaRow}>
+              <div className={styles.metaItem}>
+                <strong>Audience:</strong> {idea.targetAudience}
+              </div>
+            </div>
+            <p className={styles.reason}><strong>Trend Analysis:</strong> {idea.trendAnalysis}</p>
+            <div className={styles.cardActions}>
+              <Button variant="outline" size="sm" className={styles.copyBtn}><Copy size={14} /> Copy Idea</Button>
+              <Button variant="ghost" size="sm">Save</Button>
+            </div>
           </Card>
         ))}
       </div>

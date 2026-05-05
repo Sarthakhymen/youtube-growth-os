@@ -133,19 +133,72 @@
   margin-bottom: 0.75rem;
 }
 
-.titleText {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-main);
+.titleGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.hookBox {
-  padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
-  border-left: 4px solid var(--primary);
+.titleItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-subtle);
   border-radius: var(--radius-md);
-  font-weight: 500;
-  line-height: 1.6;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.titleItem span {
+  width: 24px;
+  height: 24px;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+.tipsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.tipCard {
+  padding: 1rem;
+  background-color: var(--bg-subtle);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.tipTime {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.tipType {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.tipCard p {
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .scriptPre {

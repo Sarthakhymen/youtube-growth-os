@@ -77,12 +77,32 @@
   border-left: 3px solid var(--primary);
 }
 
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.metaItem {
+  font-size: 0.8rem;
+  color: var(--text-main);
+}
+
 .reason {
   font-size: 0.875rem;
   color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.cardActions {
+  margin-top: auto;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .copyBtn {
-  margin-top: auto;
-  align-self: flex-start;
+  flex: 1;
 }

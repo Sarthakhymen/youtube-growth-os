@@ -6,11 +6,18 @@ import { Button } from '@/components/ui/Button';
 import { Sparkles, Copy, Download, Send } from 'lucide-react';
 import styles from './scripts.module.css';
 
+interface RetentionTip {
+  timestamp: string;
+  tip: string;
+  type: string;
+}
+
 interface ScriptResult {
   viralScore: number;
-  title: string;
+  titles: string[];
   hook: string;
   script: string;
+  retentionTips: RetentionTip[];
   cta: string;
 }
 
@@ -33,7 +40,7 @@ export default function ScriptsPage() {
       });
       
       const data = await response.json();
-      if (data.viralScore) {
+      if (data.viralScore !== undefined) {
         setResult(data);
       }
     } catch (error) {
@@ -111,20 +118,39 @@ export default function ScriptsPage() {
                     <div className={styles.viralScoreValue}>{result.viralScore}/100</div>
                   </div>
                   <div className={styles.resultActions}>
-                    <Button variant="outline" size="sm"><Copy size={14} /> Copy</Button>
+                    <Button variant="outline" size="sm"><Copy size={14} /> Copy All</Button>
                     <Button variant="outline" size="sm"><Download size={14} /> Export</Button>
                   </div>
                 </div>
 
                 <div className={styles.resultContent}>
                   <div className={styles.resultBlock}>
-                    <h4>Title Suggestion</h4>
-                    <p className={styles.titleText}>{result.title}</p>
+                    <h4>Title Variations</h4>
+                    <div className={styles.titleGrid}>
+                      {result.titles.map((title, i) => (
+                        <div key={i} className={styles.titleItem}>
+                          <span>{i + 1}</span> {title}
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   <div className={styles.resultBlock}>
                     <h4>The Hook (First 5 Seconds)</h4>
                     <div className={styles.hookBox}>{result.hook}</div>
+                  </div>
+
+                  <div className={styles.resultBlock}>
+                    <h4>Retention Blueprint (Visual Cues)</h4>
+                    <div className={styles.tipsGrid}>
+                      {result.retentionTips?.map((tip, i) => (
+                        <div key={i} className={styles.tipCard}>
+                          <span className={styles.tipTime}>{tip.timestamp}</span>
+                          <span className={styles.tipType}>{tip.type}</span>
+                          <p>{tip.tip}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   <div className={styles.resultBlock}>
