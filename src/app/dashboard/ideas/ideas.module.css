@@ -106,3 +106,21 @@
 .copyBtn {
   flex: 1;
 }
+
+@media (max-width: 640px) {
+  .inputRow {
+    flex-direction: column;
+  }
+  
+  .inputRow button {
+    width: 100%;
+  }
+
+  .resultsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .ideaCard {
+    padding: 1.5rem;
+  }
+}

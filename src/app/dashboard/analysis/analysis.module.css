@@ -1,0 +1,185 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-main);
+}
+
+.analysisInputGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.competitorInput {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background-color: var(--bg-subtle);
+  transition: var(--transition);
+}
+
+.competitorInput:focus {
+  border-color: var(--primary);
+  background-color: white;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.resultsArea {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.resultTitle {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.strategyText {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+.gapsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.gapCard {
+  padding: 1.25rem;
+  background-color: var(--bg-subtle);
+  border-radius: var(--radius-md);
+  border-left: 4px solid #f59e0b;
+  transition: transform 0.2s ease;
+}
+
+.gapCard:hover {
+  transform: translateX(4px);
+}
+
+.gapHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.gapTopic {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.gapPotential {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #b45309;
+  background-color: #fef3c7;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.gapReason {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.auditEmptyState {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem;
+}
+
+.auditIcon {
+  margin-bottom: 1.5rem;
+  opacity: 0.4;
+  color: var(--primary);
+}
+
+.statChange {
+  color: #10b981;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.inputCard {
+  padding: 2rem;
+}
+
+.cardDesc {
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.auditCard {
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.connectButton {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .analysisInputGroup {
+    flex-direction: column;
+  }
+  
+  .analysisInputGroup button {
+    width: 100%;
+  }
+
+  .statCard {
+    padding: 1.25rem;
+  }
+
+  .inputCard, .auditCard {
+    padding: 1.5rem;
+  }
+}

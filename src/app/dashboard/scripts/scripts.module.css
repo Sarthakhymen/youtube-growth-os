@@ -2,6 +2,12 @@
   height: calc(100vh - 9rem);
 }
 
+@media (max-width: 1024px) {
+  .container {
+    height: auto;
+  }
+}
+
 .grid {
   display: grid;
   grid-template-columns: 400px 1fr;
@@ -212,4 +218,42 @@
 .ctaText {
   font-style: italic;
   color: var(--text-muted);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .formSection {
+    height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .resultCard {
+    padding: 1.5rem;
+  }
+
+  .resultHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .resultActions {
+    width: 100%;
+  }
+
+  .resultActions button {
+    flex: 1;
+  }
+
+  .viralScoreValue {
+    font-size: 1.5rem;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
 }

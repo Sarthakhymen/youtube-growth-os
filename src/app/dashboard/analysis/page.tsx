@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { BarChart3, TrendingUp, Users, PlayCircle, Search, Target, Zap } from 'lucide-react';
-import styles from '../dashboard.module.css';
+import styles from './analysis.module.css';
 
 interface ContentGap {
   topic: string;
@@ -57,69 +57,63 @@ export default function AnalysisPage() {
               <span className={styles.statLabel}>{stat.label}</span>
               <span className={styles.statValue}>{stat.value}</span>
             </div>
-            <span style={{ color: '#10b981', fontWeight: '600', fontSize: '0.875rem' }}>{stat.change}</span>
+            <span className={styles.statChange}>{stat.change}</span>
           </Card>
         ))}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '1rem' }}>
+      <div className={styles.mainGrid}>
         {/* Competitor Intelligence */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}><Search size={20} /> Competitor Intelligence</h2>
-          <Card style={{ padding: '2rem' }}>
-            <p style={{ marginBottom: '1.5rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+          <Card className={styles.inputCard}>
+            <p className={styles.cardDesc}>
               Enter a competitor's channel URL to find untapped content gaps.
             </p>
-            <div style={{ display: 'flex', gap: '1rem' }}>
+            <div className={styles.analysisInputGroup}>
               <input 
                 placeholder="youtube.com/@competitor" 
+                className={styles.competitorInput}
                 value={competitorUrl}
                 onChange={(e) => setCompetitorUrl(e.target.value)}
-                style={{ 
-                  flex: 1, 
-                  padding: '0.75rem 1rem', 
-                  borderRadius: 'var(--radius-md)', 
-                  border: '1px solid var(--border)',
-                  backgroundColor: 'var(--bg-subtle)'
-                }}
               />
               <Button isLoading={loading} onClick={handleAnalyze}>Analyze</Button>
             </div>
 
             {result && (
-              <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div className={styles.resultsArea}>
                 <div>
-                  <h4 style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>Winning Strategy</h4>
-                  <p style={{ fontSize: '0.9rem', lineHeight: '1.6', color: 'var(--text-main)' }}>{result.winningStrategy}</p>
+                  <h4 className={styles.resultTitle}>Winning Strategy</h4>
+                  <p className={styles.strategyText}>{result.winningStrategy}</p>
                 </div>
                 
                 <div>
-                  <h4 style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>Content Gaps Identified</h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <h4 className={styles.resultTitle}>Content Gaps Identified</h4>
+                  <div className={styles.gapsList}>
                     {result.contentGaps.map((gap, i) => (
-                      <div key={i} style={{ padding: '1rem', backgroundColor: 'var(--bg-subtle)', borderRadius: 'var(--radius-md)', borderLeft: '3px solid #f59e0b' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
-                          <span style={{ fontWeight: '700', fontSize: '0.9rem' }}>{gap.topic}</span>
-                          <span style={{ fontSize: '0.7rem', fontWeight: '800', color: '#b45309' }}>{gap.potentialViews} POTENTIAL</span>
+                      <div key={i} className={styles.gapCard}>
+                        <div className={styles.gapHeader}>
+                          <span className={styles.gapTopic}>{gap.topic}</span>
+                          <span className={styles.gapPotential}>{gap.potentialViews} POTENTIAL</span>
                         </div>
-                        <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{gap.reason}</p>
+                        <p className={styles.gapReason}>{gap.reason}</p>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
             )}
-          </section>
+          </Card>
         </section>
-
+        
         {/* Channel Insights */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}><Target size={20} /> AI Channel Audit</h2>
-          <Card style={{ padding: '2rem', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
-              <Zap size={48} style={{ marginBottom: '1rem', opacity: 0.5 }} />
+          <Card className={styles.auditCard}>
+            <div className={styles.auditEmptyState}>
+              <Zap size={48} className={styles.auditIcon} />
               <p>Connect your YouTube channel to unlock AI-powered audience growth strategies.</p>
-              <Button variant="outline" style={{ marginTop: '1.5rem' }}>Connect YouTube</Button>
+              <Button variant="outline" className={styles.connectButton}>Connect YouTube</Button>
             </div>
           </Card>
         </section>
