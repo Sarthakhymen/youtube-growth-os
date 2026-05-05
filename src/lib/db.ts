@@ -11,13 +11,13 @@ declare global {
   var mongoose: MongooseCache | undefined;
 }
 
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
-
 async function dbConnect() {
+  if (!global.mongoose) {
+    global.mongoose = { conn: null, promise: null };
+  }
+  
+  const cached = global.mongoose;
+
   if (cached.conn) {
     return cached.conn;
   }
@@ -31,7 +31,14 @@ async function dbConnect() {
       return mongoose;
     });
   }
-  cached.conn = await cached.promise;
+  
+  try {
+    cached.conn = await cached.promise;
+  } catch (e) {
+    cached.promise = null;
+    throw e;
+  }
+
   return cached.conn;
 }
 
