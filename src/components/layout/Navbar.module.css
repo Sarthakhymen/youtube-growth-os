@@ -117,4 +117,8 @@
   .mobileActions {
     display: flex;
   }
+
+  .mobileFullWidth {
+    width: 100%;
+  }
 }

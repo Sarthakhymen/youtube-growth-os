@@ -26,8 +26,8 @@ export const Navbar = () => {
           <Link href="#pricing" onClick={() => setIsMenuOpen(false)}>Pricing</Link>
           <Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>Dashboard</Link>
           <div className={styles.mobileActions}>
-             <Button variant="ghost" fullWidth onClick={() => { setIsMenuOpen(false); router.push('/dashboard'); }}>Login</Button>
-             <Button fullWidth onClick={() => { setIsMenuOpen(false); router.push('/dashboard'); }}>
+             <Button variant="ghost" className={styles.mobileFullWidth} onClick={() => { setIsMenuOpen(false); router.push('/dashboard'); }}>Login</Button>
+             <Button className={styles.mobileFullWidth} onClick={() => { setIsMenuOpen(false); router.push('/dashboard'); }}>
                Start Creating <Zap size={16} fill="white" />
              </Button>
           </div>
