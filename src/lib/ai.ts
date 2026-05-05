@@ -8,7 +8,7 @@ const openai = new OpenAI({
 export const generateCompletion = async (prompt: string, systemPrompt?: string) => {
   try {
     const completion = await openai.chat.completions.create({
-      model: process.env.NVIDIA_MODEL || "qwen/qwen3-coder-480b-a35b-instruct",
+      model: process.env.NVIDIA_MODEL || "meta/llama-3.1-70b-instruct",
       messages: [
         { role: "system", content: systemPrompt || "You are a Senior YouTube Content Strategist and Scriptwriter." },
         { role: "user", content: prompt }
@@ -28,7 +28,7 @@ export const generateCompletion = async (prompt: string, systemPrompt?: string) 
 export const generateStructuredCompletion = async <T>(prompt: string, systemPrompt: string): Promise<T> => {
   try {
     const completion = await openai.chat.completions.create({
-      model: process.env.NVIDIA_MODEL || "qwen/qwen3-coder-480b-a35b-instruct",
+      model: process.env.NVIDIA_MODEL || "meta/llama-3.1-70b-instruct",
       messages: [
         { role: "system", content: `${systemPrompt}\n\nIMPORTANT: Respond ONLY with valid JSON.` },
         { role: "user", content: prompt }
