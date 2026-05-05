@@ -26,7 +26,12 @@ const menuItems = [
   { name: 'Settings', icon: <Settings size={20} />, path: '/dashboard/settings' },
 ];
 
-export const Sidebar = () => {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
 
@@ -35,7 +40,7 @@ export const Sidebar = () => {
   }, []);
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={clsx(styles.sidebar, isOpen && styles.open)}>
       <div className={styles.logo}>
         <div className={styles.logoIcon}>
           <Video size={20} color="white" />

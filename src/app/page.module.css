@@ -231,22 +231,57 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    padding: 6rem 0 4rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
   .heroActions {
     flex-direction: column;
     width: 100%;
     max-width: 320px;
     margin-left: auto;
     margin-right: auto;
+    gap: 1rem;
   }
   
   .heroStats {
     flex-direction: column;
     gap: 2rem;
+    padding: 2rem 1rem;
   }
   
   .divider {
     width: 40px;
     height: 1px;
     margin: 0 auto;
+  }
+
+  .sectionHeader {
+    padding: 0 1.5rem;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+  }
+
+  .pricingGrid {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+    gap: 2rem;
+  }
+
+  .featuredPrice {
+    transform: scale(1);
+    order: -1;
   }
 }
