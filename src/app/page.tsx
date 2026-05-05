@@ -29,41 +29,34 @@ export default function LandingPage() {
     document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleRazorpay = async (amount: number, planName: string) => {
+  const [waitlistEmail, setWaitlistEmail] = React.useState('');
+  const [isJoining, setIsJoining] = React.useState(false);
+  const [joined, setJoined] = React.useState(false);
+
+  const handleJoinWaitlist = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!waitlistEmail) return;
+    
+    setIsJoining(true);
     try {
-      const response = await fetch('/api/checkout/razorpay', {
+      const response = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount, currency: 'INR' }),
+        body: JSON.stringify({ email: waitlistEmail, plan: 'Pro' }),
       });
       
-      const order = await response.json();
-      
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Enter your Key ID here
-        amount: order.amount,
-        currency: order.currency,
-        name: 'YouTube Growth OS',
-        description: `Upgrade to ${planName} Plan`,
-        order_id: order.id,
-        handler: function (response: any) {
-          alert('Payment Successful! Payment ID: ' + response.razorpay_payment_id);
-          router.push('/dashboard');
-        },
-        prefill: {
-          name: 'Creator Name',
-          email: 'creator@example.com',
-        },
-        theme: {
-          color: '#4f46e5',
-        },
-      };
-
-      const rzp = new window.Razorpay(options);
-      rzp.open();
+      if (response.ok) {
+        setJoined(true);
+        setWaitlistEmail('');
+      } else {
+        const data = await response.json();
+        alert(data.message || 'Something went wrong');
+      }
     } catch (error) {
-      console.error('Payment Error:', error);
-      alert('Payment failed to initialize. Check console for details.');
+      console.error('Waitlist Error:', error);
+      alert('Failed to join waitlist.');
+    } finally {
+      setIsJoining(false);
     }
   };
   return (
@@ -182,7 +175,28 @@ export default function LandingPage() {
                 <li><CheckCircle2 size={18} /> Channel Growth Audit</li>
                 <li><CheckCircle2 size={18} /> Priority AI Support</li>
               </ul>
-              <Button className={styles.priceBtn} onClick={() => handleRazorpay(2499, 'Pro')}>Go Pro</Button>
+              <div className={styles.waitlistForm}>
+                {joined ? (
+                  <div className={styles.successMsg}>
+                    <CheckCircle2 size={24} />
+                    <span>You're on the list! We'll notify you when Pro launches.</span>
+                  </div>
+                ) : (
+                  <form onSubmit={handleJoinWaitlist} className={styles.waitlistInputGroup}>
+                    <input 
+                      type="email" 
+                      placeholder="Enter your email" 
+                      className={styles.waitlistInput}
+                      value={waitlistEmail}
+                      onChange={(e) => setWaitlistEmail(e.target.value)}
+                      required
+                    />
+                    <Button type="submit" isLoading={isJoining} className={styles.priceBtn}>
+                      Join Waitlist
+                    </Button>
+                  </form>
+                )}
+              </div>
             </Card>
           </div>
         </div>
