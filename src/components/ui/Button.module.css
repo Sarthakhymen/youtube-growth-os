@@ -9,7 +9,11 @@
   border: 1px solid transparent;
   cursor: pointer;
   white-space: nowrap;
-  font-family: var(--font-inter);
+  font-family: var(--font-outfit);
+}
+
+.fullWidth {
+  width: 100%;
 }
 
 .button:disabled {

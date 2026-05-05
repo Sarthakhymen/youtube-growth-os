@@ -11,14 +11,21 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
+  fullWidth?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', isLoading, children, ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', isLoading, fullWidth, children, ...props }, ref) => {
     return (
       <button
         ref={ref}
-        className={cn(styles.button, styles[variant], styles[size], className)}
+        className={cn(
+          styles.button, 
+          styles[variant], 
+          styles[size], 
+          fullWidth && styles.fullWidth,
+          className
+        )}
         disabled={isLoading || props.disabled}
         {...props}
       >
